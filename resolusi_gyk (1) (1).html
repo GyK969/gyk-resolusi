@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resolusi GyK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --matcha:       #6A9E5A;
+      --matcha-dark:  #4D7A3C;
+      --matcha-light: #A8C89A;
+      --matcha-pale:  #EAF2E5;
+      --cream:        #FFF9EE;
+      --text:         #333;
+      --white:        #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--matcha);
+      padding: 20px 24px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before, .header::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .header::before { width: 200px; height: 200px; top: -60px; left: -60px; }
+    .header::after  { width: 150px; height: 150px; bottom: -50px; right: -40px; }
+
+    .deco { position: absolute; font-size: 1.3rem; opacity: .5; }
+    .deco.d1 { top: 8px;  right: 60px; transform: rotate(20deg); }
+    .deco.d2 { top: 28px; right: 28px; transform: rotate(-10deg); }
+    .deco.d3 { bottom: 8px; left: 50px; transform: rotate(30deg); }
+
+    .header h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+      color: var(--white);
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 2px 3px 0 var(--matcha-dark);
+    }
+    .header p {
+      margin-top: 3px;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--matcha-pale);
+      letter-spacing: 1px;
+    }
+
+    /* ── PROFILE PHOTO ── */
+    .profile-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .profile-circle {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 5px solid var(--matcha);
+      background: var(--matcha-pale);
+      box-shadow: 0 6px 24px rgba(74,122,60,.25);
+      overflow: hidden;
+    }
+    .profile-circle img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      max-width: 480px;
+      margin: 28px auto 0;
+      padding: 0 16px 48px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 3px;
+      transform: translateX(-50%);
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--matcha) 0, var(--matcha) 8px,
+        transparent 8px, transparent 16px
+      );
+    }
+
+    .row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .row::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--matcha);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--matcha);
+      z-index: 2;
+    }
+
+    .box-left {
+      width: calc(50% - 18px);
+      margin-right: 36px;
+      text-align: right;
+    }
+    .box-right {
+      width: calc(50% - 18px);
+      margin-left: 36px;
+    }
+
+    .row.flip .box-left  { order: 2; margin-left: 36px; margin-right: 0; text-align: left; }
+    .row.flip .box-right { order: 1; margin-right: 36px; margin-left: 0; }
+
+    .year-label {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--matcha);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .row.flip .year-label { text-align: left; }
+
+    .text-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 11px 13px;
+      box-shadow: 0 3px 14px rgba(74,122,60,.12);
+      border-left: 4px solid var(--matcha);
+    }
+    .row.flip .text-card { border-left: none; border-right: 4px solid var(--matcha); }
+
+    .text-card p {
+      font-size: .8rem;
+      line-height: 1.55;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    .text-card p:last-child { margin-bottom: 0; }
+
+    /* ── PHOTO SLOT (static) ── */
+    .photo-slot {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      background: var(--matcha-pale);
+      border: 2px dashed var(--matcha-light);
+      overflow: hidden;
+    }
+    .photo-slot img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--matcha);
+      text-align: center;
+      padding: 14px;
+      font-family: 'Fredoka One', cursive;
+      color: var(--white);
+      letter-spacing: 1px;
+      font-size: .95rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .row { animation: fadeUp .5s ease both; }
+    .row:nth-child(1) { animation-delay: .1s; }
+    .row:nth-child(2) { animation-delay: .22s; }
+    .row:nth-child(3) { animation-delay: .34s; }
+    .row:nth-child(4) { animation-delay: .46s; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <span class="deco d1">➤</span>
+  <span class="deco d2">➣</span>
+  <span class="deco d3">►</span>
+  <h1>RESOLUSI<br>GyK</h1>
+  <p>Berusaha untuk berubah</p>
+</div>
+
+<!-- PROFILE PHOTO -->
+<!-- Taruh foto profil kamu di folder "images/" lalu ganti nama file di bawah -->
+<div class="profile-wrap">
+  <div class="profile-circle">
+    <img src="images/profil.jpg" alt="foto profil"/>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline">
+
+  <!-- ROW 1: teks kiri, foto kanan -->
+  <div class="row">
+    <div class="box-left">
+      <span class="year-label">Umur 17-18</span>
+      <div class="text-card">
+        <p>Belajar hal baru, mencari jati diri, menjadi pribadi yang lebih baik.</p>
+        <p>Menambah relasi.</p>
+      </div>
+    </div>
+    <div class="box-right">
+      <div class="photo-slot">
+        <img src="images/foto1.jpg" alt="foto contoh1"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: foto kiri, teks kanan -->
+  <div class="row flip">
+    <div class="box-left">
+      <div class="photo-slot">
+        <img src="images/foto2.jpg" alt="foto contoh2"/>
+      </div>
+    </div>
+    <div class="box-right">
+      <span class="year-label">Umur 19-22</span>
+      <div class="text-card">
+        <p>Mencari peluang untuk menghasilkan uang, bekerja keras, mulai menabung sebagai orang dewasa.</p>
+        <p>Mulai membantu ekonomi keluarga walaupun tidak banyak.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: teks kiri, foto kanan -->
+  <div class="row">
+    <div class="box-left">
+      <span class="year-label">Umur 23-26</span>
+      <div class="text-card">
+        <p>Spending uang ke hiburan.</p>
+        <p>Mencari jodoh.</p>
+      </div>
+    </div>
+    <div class="box-right">
+      <div class="photo-slot">
+        <img src="images/foto3.jpg" alt="foto contoh3"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: foto kiri, teks kanan -->
+  <div class="row flip">
+    <div class="box-left">
+      <div class="photo-slot">
+        <img src="images/foto4.jpg" alt="foto contoh4"/>
+      </div>
+    </div>
+    <div class="box-right">
+      <span class="year-label">27-seterusnya</span>
+      <div class="text-card">
+        <p>Menikmatimati hidup.</p>
+        <p>Menikah bila mampu.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /timeline -->
+
+<!-- FOOTER -->
+<div class="footer">www.resolusi_gyk.com</div>
+
+</body>
+</html>
